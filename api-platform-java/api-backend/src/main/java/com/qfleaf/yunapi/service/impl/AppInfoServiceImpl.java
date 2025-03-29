@@ -46,7 +46,7 @@ public class AppInfoServiceImpl extends ServiceImpl<AppInfoMapper, AppInfo>
                 .like(StringUtils.hasLength(request.getDescription()), AppInfo::getDescription, request.getDescription())
                 .ge(request.getCreatedAt() != null, AppInfo::getCreatedAt, request.getCreatedAt())
                 .isNull(AppInfo::getDeletedAt);
-        return baseMapper.selectPageVO(page, queryWrapper);
+        return baseMapper.selectPageVo(page, queryWrapper);
     }
 
     @Override

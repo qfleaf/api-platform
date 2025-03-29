@@ -19,7 +19,7 @@ public interface AppInfoMapper extends BaseMapper<AppInfo> {
     @Select("select id, name, created_at " +
             "from app_info " +
             "${ew.customSqlSegment}")
-    IPage<AppInfoPageVO> selectPageVO(IPage<AppInfoPageVO> page, @Param("ew") LambdaQueryWrapper<AppInfo> queryWrapper);
+    IPage<AppInfoPageVO> selectPageVo(IPage<AppInfoPageVO> page, @Param("ew") LambdaQueryWrapper<AppInfo> queryWrapper);
     @Select("select t1.id, username as developer, name, description, t1.created_at " +
             "from app_info t1 " +
             "left join users t2 " +
