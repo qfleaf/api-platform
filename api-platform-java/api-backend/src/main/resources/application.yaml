@@ -5,6 +5,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/api-platform-dev
     driver-class-name: org.postgresql.Driver
     username: qianfang
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 10000
 server:
   port: 8081
   servlet:
@@ -17,9 +23,10 @@ logging:
 mybatis-plus:
   global-config:
     db-config:
-      logic-delete-field: is_deleted # 全局逻辑删除字段名
-      logic-delete-value: true # 逻辑已删除值
-      logic-not-delete-value: false # 逻辑未删除值
+      id-type: ASSIGN_ID
+      logic-delete-field: deletedAt      # 逻辑删除字段
+      logic-delete-value: now()          # 逻辑删除时的值
+      logic-not-delete-value: 'null'     # 未删除的值
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
