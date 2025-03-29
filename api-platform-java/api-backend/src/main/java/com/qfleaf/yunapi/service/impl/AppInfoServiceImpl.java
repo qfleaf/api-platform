@@ -70,6 +70,14 @@ public class AppInfoServiceImpl extends ServiceImpl<AppInfoMapper, AppInfo>
 
     @Override
     public void updateById(AppInfoEditRequest request) {
+        LambdaQueryWrapper<AppInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper
+                .eq(AppInfo::getName, request.getName())
+                .ne(AppInfo::getId, request.getId());
+        boolean exists = baseMapper.exists(queryWrapper);
+        if (exists) {
+            throw new BusinessException(ResponseCode.CONFLICT, "应用名称已存在");
+        }
         AppInfo entity = appInfoConvert.toEntity(request);
         baseMapper.updateById(entity);
     }
