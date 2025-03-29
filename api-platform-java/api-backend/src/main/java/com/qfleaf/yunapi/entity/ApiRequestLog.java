@@ -1,6 +1,9 @@
 package com.qfleaf.yunapi.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -27,7 +30,9 @@ public class ApiRequestLog implements Serializable {
 
     private String ipAddress;
 
+    @TableLogic
     private Date deletedAt;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }
