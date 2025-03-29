@@ -1,7 +1,13 @@
 package com.qfleaf.yunapi.mapper;
 
-import com.qfleaf.yunapi.entity.ApiInfo;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.qfleaf.yunapi.entity.ApiInfo;
+import com.qfleaf.yunapi.open.model.vo.ApiInfoPageVO;
+import com.qfleaf.yunapi.open.model.vo.ApiInfoVO;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
 * @author qianfang
@@ -10,7 +16,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.qfleaf.yunapi.entity.ApiInfo
 */
 public interface ApiInfoMapper extends BaseMapper<ApiInfo> {
-
+    @Select("select id, name, endpoint, method, status " +
+            "from api_info " +
+            "${ew.customSqlSegment}")
+    IPage<ApiInfoPageVO> selectPageVo(IPage<ApiInfoPageVO> page, @Param("ew") LambdaQueryWrapper<ApiInfo> queryWrapper);
+    @Select("select id, name, description, endpoint, method, version, status, created_at, updated_at " +
+            "from api_info " +
+            "where id = ${id}")
+    ApiInfoVO selectVoById(Long id);
 }
 
 

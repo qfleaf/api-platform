@@ -1,7 +1,15 @@
 package com.qfleaf.yunapi.service;
 
-import com.qfleaf.yunapi.entity.ApiInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qfleaf.yunapi.entity.ApiInfo;
+import com.qfleaf.yunapi.open.model.dto.api.ApiInfoCreateRequest;
+import com.qfleaf.yunapi.open.model.dto.api.ApiInfoDebugRequest;
+import com.qfleaf.yunapi.open.model.dto.api.ApiInfoQueryRequest;
+import com.qfleaf.yunapi.open.model.dto.api.ApiInfoUpdateRequest;
+import com.qfleaf.yunapi.open.model.vo.ApiInfoDebugResponse;
+import com.qfleaf.yunapi.open.model.vo.ApiInfoPageVO;
+import com.qfleaf.yunapi.open.model.vo.ApiInfoVO;
 
 /**
 * @author qianfang
@@ -9,5 +17,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-03-29 12:33:27
 */
 public interface ApiInfoService extends IService<ApiInfo> {
-
+    IPage<ApiInfoPageVO> findPageVo(ApiInfoQueryRequest request);
+    ApiInfoVO findById(Long id);
+    void createApi(ApiInfoCreateRequest request);
+    void updateById(ApiInfoUpdateRequest request);
+    void enable(Long id);
+    void disable(Long id);
+    ApiInfoDebugResponse debug(ApiInfoDebugRequest request);
 }
