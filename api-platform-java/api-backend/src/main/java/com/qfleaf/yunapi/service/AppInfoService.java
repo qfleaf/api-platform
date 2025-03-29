@@ -1,7 +1,13 @@
 package com.qfleaf.yunapi.service;
 
-import com.qfleaf.yunapi.entity.AppInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qfleaf.yunapi.entity.AppInfo;
+import com.qfleaf.yunapi.open.model.dto.app.AppInfoCreateRequest;
+import com.qfleaf.yunapi.open.model.dto.app.AppInfoEditRequest;
+import com.qfleaf.yunapi.open.model.dto.app.AppInfoQueryRequest;
+import com.qfleaf.yunapi.open.model.vo.AppInfoPageVO;
+import com.qfleaf.yunapi.open.model.vo.AppInfoVO;
 
 /**
 * @author qianfang
@@ -9,5 +15,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-03-29 12:33:27
 */
 public interface AppInfoService extends IService<AppInfo> {
-
+    IPage<AppInfoPageVO> findPageVO(AppInfoQueryRequest request);
+    AppInfoVO findById(long id);
+    void saveApp(AppInfoCreateRequest request);
+    void updateById(AppInfoEditRequest request);
 }
