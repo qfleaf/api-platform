@@ -70,8 +70,10 @@ public class AppInfoServiceImpl extends ServiceImpl<AppInfoMapper, AppInfo>
 
     @Override
     public void updateById(AppInfoEditRequest request) {
+        LoginUserVO currentUser = usersService.getCurrentUser();
         LambdaQueryWrapper<AppInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper
+                .eq(AppInfo::getUserId, currentUser.getId())
                 .eq(AppInfo::getName, request.getName())
                 .ne(AppInfo::getId, request.getId());
         boolean exists = baseMapper.exists(queryWrapper);
