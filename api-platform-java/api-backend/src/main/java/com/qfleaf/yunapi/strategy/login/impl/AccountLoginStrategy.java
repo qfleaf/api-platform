@@ -7,7 +7,7 @@ import com.qfleaf.web.utils.PasswordUtil;
 import com.qfleaf.yunapi.convert.UsersConvert;
 import com.qfleaf.yunapi.entity.Users;
 import com.qfleaf.yunapi.mapper.UsersMapper;
-import com.qfleaf.yunapi.open.model.dto.UserLoginRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserLoginRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.strategy.login.Constants;
 import com.qfleaf.yunapi.strategy.login.LoginStrategy;
