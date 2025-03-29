@@ -19,6 +19,7 @@ public enum ResponseCode {
     BAD_LOGIN(40101, "未登陆"),
     BAD_PERMIT(40300, "权限错误"),
     BAD_FUNCTION(40501, "功能未启用"),
+    CONFLICT(40900, "请求冲突"),
     // endregion
 
     // region 错误
