@@ -15,7 +15,7 @@ import com.qfleaf.yunapi.open.model.vo.AppInfoVO;
 * @createDate 2025-03-29 12:33:27
 */
 public interface AppInfoService extends IService<AppInfo> {
-    IPage<AppInfoPageVO> findPageVO(AppInfoQueryRequest request);
+    IPage<AppInfoPageVO> findPageVo(AppInfoQueryRequest request);
     AppInfoVO findById(long id);
     void saveApp(AppInfoCreateRequest request);
     void updateById(AppInfoEditRequest request);

@@ -37,7 +37,7 @@ public class AppInfoServiceImpl extends ServiceImpl<AppInfoMapper, AppInfo>
     }
 
     @Override
-    public IPage<AppInfoPageVO> findPageVO(AppInfoQueryRequest request) {
+    public IPage<AppInfoPageVO> findPageVo(AppInfoQueryRequest request) {
         IPage<AppInfoPageVO> page = new Page<>(request.getCurrent(), request.getSize());
         LambdaQueryWrapper<AppInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper

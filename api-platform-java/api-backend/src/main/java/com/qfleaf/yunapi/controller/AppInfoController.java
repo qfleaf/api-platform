@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.qfleaf.web.common.CommonResponse;
 import com.qfleaf.web.common.ResponseCode;
 import com.qfleaf.web.utils.ResultUtil;
+import com.qfleaf.yunapi.annotation.Authorized;
 import com.qfleaf.yunapi.open.model.dto.app.AppInfoCreateRequest;
 import com.qfleaf.yunapi.open.model.dto.app.AppInfoEditRequest;
 import com.qfleaf.yunapi.open.model.dto.app.AppInfoQueryRequest;
@@ -23,11 +24,13 @@ public class AppInfoController {
         this.appInfoService = appInfoService;
     }
 
+    @Authorized
     @GetMapping("list")
     public CommonResponse<IPage<AppInfoPageVO>> listAppInfo(@Valid @ParameterObject AppInfoQueryRequest request) {
-        IPage<AppInfoPageVO> page = appInfoService.findPageVO(request);
+        IPage<AppInfoPageVO> page = appInfoService.findPageVo(request);
         return ResultUtil.success(ResponseCode.SUCCESS, page);
     }
+    // todo 增加一个获取当前用户app信息列表的接口
 
     @GetMapping("{id}")
     public CommonResponse<AppInfoVO> getAppInfoById(@PathVariable("id") Long id) {
