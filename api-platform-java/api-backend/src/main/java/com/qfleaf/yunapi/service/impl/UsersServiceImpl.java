@@ -5,9 +5,11 @@ import com.qfleaf.web.common.constant.HttpConst;
 import com.qfleaf.web.common.constant.RedisConst;
 import com.qfleaf.web.token.JwtService;
 import com.qfleaf.web.utils.RedisUtil;
+import com.qfleaf.yunapi.convert.UsersConvert;
 import com.qfleaf.yunapi.entity.Users;
 import com.qfleaf.yunapi.mapper.UsersMapper;
 import com.qfleaf.yunapi.open.model.dto.UserLoginRequest;
+import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.open.model.vo.UserLoginResponse;
 import com.qfleaf.yunapi.service.UsersService;
@@ -29,18 +31,26 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
     private final RedisUtil redisUtil;
     private final JwtService jwtService;
     private final HttpServletRequest httpServletRequest;
+    private final UsersConvert usersConvert;
 
-    public UsersServiceImpl(LoginStrategyManager loginStrategyManager, RedisUtil redisUtil, JwtService jwtService, HttpServletRequest httpServletRequest) {
+    public UsersServiceImpl(LoginStrategyManager loginStrategyManager, RedisUtil redisUtil, JwtService jwtService, HttpServletRequest httpServletRequest, UsersConvert usersConvert) {
         this.loginStrategyManager = loginStrategyManager;
         this.redisUtil = redisUtil;
         this.jwtService = jwtService;
         this.httpServletRequest = httpServletRequest;
+        this.usersConvert = usersConvert;
     }
 
     @Override
     public LoginUserVO getCurrentUser() {
         String authorization = httpServletRequest.getHeader(HttpConst.USER_TOKEN_HEADER_KEY);
         return (LoginUserVO) redisUtil.get(RedisConst.LOGIN_USER + authorization);
+    }
+
+    @Override
+    public void register(UserRegisterRequest userRegisterRequest) {
+        Users user = usersConvert.toEntity(userRegisterRequest);
+        baseMapper.insert(user);
     }
 
     @Override

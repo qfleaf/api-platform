@@ -3,6 +3,7 @@ package com.qfleaf.yunapi.service;
 import com.qfleaf.yunapi.entity.Users;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.qfleaf.yunapi.open.model.dto.UserLoginRequest;
+import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.open.model.vo.UserLoginResponse;
 
@@ -13,6 +14,7 @@ import com.qfleaf.yunapi.open.model.vo.UserLoginResponse;
 */
 public interface UsersService extends IService<Users> {
     LoginUserVO getCurrentUser();
+    void register(UserRegisterRequest userRegisterRequest);
     UserLoginResponse login(UserLoginRequest loginRequest);
     void logout();
 }
