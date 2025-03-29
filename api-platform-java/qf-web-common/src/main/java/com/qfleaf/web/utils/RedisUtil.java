@@ -1,11 +1,6 @@
 package com.qfleaf.web.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
