@@ -1,7 +1,12 @@
 package com.qfleaf.yunapi.service;
 
-import com.qfleaf.yunapi.entity.ApiAuth;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qfleaf.yunapi.entity.ApiAuth;
+import com.qfleaf.yunapi.open.model.dto.auth.ApiAuthCreateRequest;
+import com.qfleaf.yunapi.open.model.dto.auth.ApiAuthQueryRequest;
+import com.qfleaf.yunapi.open.model.vo.ApiAuthPageVO;
+import com.qfleaf.yunapi.open.model.vo.ApiAuthVO;
 
 /**
 * @author qianfang
@@ -9,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-03-29 12:33:27
 */
 public interface ApiAuthService extends IService<ApiAuth> {
-
+    IPage<ApiAuthPageVO> findPageVo(ApiAuthQueryRequest request);
+    void generateApiAuth(ApiAuthCreateRequest request);
+    ApiAuthVO findById(Long id);
 }
