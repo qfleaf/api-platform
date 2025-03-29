@@ -35,6 +35,11 @@
             <artifactId>api-interface</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.qfleaf</groupId>
+            <artifactId>yunapi-sdk</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
