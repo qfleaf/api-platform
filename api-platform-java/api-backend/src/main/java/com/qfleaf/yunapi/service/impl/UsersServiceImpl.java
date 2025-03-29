@@ -1,8 +1,10 @@
 package com.qfleaf.yunapi.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.qfleaf.web.common.ResponseCode;
 import com.qfleaf.web.common.constant.HttpConst;
 import com.qfleaf.web.common.constant.RedisConst;
+import com.qfleaf.web.common.exception.BusinessException;
 import com.qfleaf.web.token.JwtService;
 import com.qfleaf.web.utils.RedisUtil;
 import com.qfleaf.yunapi.convert.UsersConvert;
@@ -44,6 +46,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
     @Override
     public LoginUserVO getCurrentUser() {
         String authorization = httpServletRequest.getHeader(HttpConst.USER_TOKEN_HEADER_KEY);
+        if (authorization == null) {
+            throw new BusinessException(ResponseCode.BAD_AUTH, "未登陆");
+        }
         return (LoginUserVO) redisUtil.get(RedisConst.LOGIN_USER + authorization);
     }
 
