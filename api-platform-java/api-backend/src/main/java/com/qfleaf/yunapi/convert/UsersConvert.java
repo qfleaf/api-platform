@@ -1,6 +1,8 @@
 package com.qfleaf.yunapi.convert;
 
+import com.qfleaf.web.utils.PasswordUtil;
 import com.qfleaf.yunapi.entity.Users;
+import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +19,13 @@ public class UsersConvert {
         loginUserVO.setCreatedAt(user.getCreatedAt());
         loginUserVO.setUpdatedAt(user.getUpdatedAt());
         return loginUserVO;
+    }
+
+    public Users toEntity(UserRegisterRequest userRegisterRequest) {
+        Users user = new Users();
+        user.setUsername(userRegisterRequest.getUsername());
+        user.setPassword(PasswordUtil.encode(userRegisterRequest.getPassword()));
+        user.setEmail(userRegisterRequest.getEmail());
+        return user;
     }
 }
