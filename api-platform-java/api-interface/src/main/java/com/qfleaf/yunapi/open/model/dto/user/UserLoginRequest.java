@@ -1,4 +1,4 @@
-package com.qfleaf.yunapi.open.model.dto;
+package com.qfleaf.yunapi.open.model.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

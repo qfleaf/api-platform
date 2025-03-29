@@ -3,8 +3,8 @@ package com.qfleaf.yunapi.controller;
 import com.qfleaf.web.common.CommonResponse;
 import com.qfleaf.web.common.ResponseCode;
 import com.qfleaf.web.utils.ResultUtil;
-import com.qfleaf.yunapi.open.model.dto.UserLoginRequest;
-import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserLoginRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.open.model.vo.UserLoginResponse;
 import com.qfleaf.yunapi.service.UsersService;
@@ -41,6 +41,6 @@ public class UsersController {
     @PostMapping("logout")
     public CommonResponse<Void> logout() {
         usersService.logout();
-        return ResultUtil.success(ResponseCode.SUCCESS_LOGIN, null);
+        return ResultUtil.success(ResponseCode.SUCCESS, null);
     }
 }

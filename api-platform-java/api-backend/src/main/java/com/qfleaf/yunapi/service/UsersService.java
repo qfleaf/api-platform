@@ -2,8 +2,8 @@ package com.qfleaf.yunapi.service;
 
 import com.qfleaf.yunapi.entity.Users;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.qfleaf.yunapi.open.model.dto.UserLoginRequest;
-import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserLoginRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.open.model.vo.UserLoginResponse;
 

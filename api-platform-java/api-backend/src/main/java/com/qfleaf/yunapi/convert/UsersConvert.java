@@ -2,7 +2,7 @@ package com.qfleaf.yunapi.convert;
 
 import com.qfleaf.web.utils.PasswordUtil;
 import com.qfleaf.yunapi.entity.Users;
-import com.qfleaf.yunapi.open.model.dto.UserRegisterRequest;
+import com.qfleaf.yunapi.open.model.dto.user.UserRegisterRequest;
 import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
 import org.springframework.stereotype.Component;
 
