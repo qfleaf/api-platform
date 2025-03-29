@@ -20,7 +20,7 @@ public class ApiAuth implements Serializable {
 
     private Long userId;
 
-    private Long apiId;
+    private Long appId;
 
     private String authKey;
 
