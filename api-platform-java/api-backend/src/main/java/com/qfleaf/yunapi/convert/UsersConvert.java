@@ -15,7 +15,6 @@ public class UsersConvert {
         loginUserVO.setEmail(user.getEmail());
         loginUserVO.setRole(user.getRole());
         loginUserVO.setStatus(user.getStatus());
-        loginUserVO.setDeletedAt(user.getDeletedAt());
         loginUserVO.setCreatedAt(user.getCreatedAt());
         loginUserVO.setUpdatedAt(user.getUpdatedAt());
         return loginUserVO;

@@ -1,5 +1,6 @@
 package com.qfleaf.yunapi.open.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serial;
@@ -13,8 +14,9 @@ public class LoginUserVO implements Serializable {
     private String email;
     private String role;
     private Boolean status;
-    private Date deletedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date updatedAt;
     @Serial
     private static final long serialVersionUID = 1L;
