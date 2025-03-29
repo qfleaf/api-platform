@@ -12,6 +12,6 @@ public class AppInfoEditRequest {
     @NotBlank(message = "应用名称不能为空")
     @Size(min = 1, max = 32, message = "应用名称长度只能在1~32个字符")
     private String name;
-    @Size(max = 200, message = "应用描述长度最多为200字符")
+    @Size(max = 1000, message = "应用描述长度最多为500字")
     private String description;
 }
