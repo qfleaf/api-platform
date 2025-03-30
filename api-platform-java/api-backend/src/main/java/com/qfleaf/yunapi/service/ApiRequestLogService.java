@@ -1,7 +1,11 @@
 package com.qfleaf.yunapi.service;
 
-import com.qfleaf.yunapi.entity.ApiRequestLog;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qfleaf.yunapi.entity.ApiRequestLog;
+import com.qfleaf.yunapi.open.model.Pageable;
+import com.qfleaf.yunapi.open.model.vo.ApiRequestLogPageVO;
+import com.qfleaf.yunapi.open.model.vo.ApiRequestLogVO;
 
 /**
 * @author qianfang
@@ -9,5 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-03-29 12:33:27
 */
 public interface ApiRequestLogService extends IService<ApiRequestLog> {
-
+    IPage<ApiRequestLogPageVO> findPageVo(Pageable pageable);
+    ApiRequestLogVO findVoById(Long id);
 }

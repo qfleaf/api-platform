@@ -1,7 +1,13 @@
 package com.qfleaf.yunapi.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.qfleaf.yunapi.entity.ApiRequestLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.qfleaf.yunapi.open.model.vo.ApiRequestLogPageVO;
+import com.qfleaf.yunapi.open.model.vo.ApiRequestLogVO;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
 * @author qianfang
@@ -10,7 +16,18 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.qfleaf.yunapi.entity.ApiRequestLog
 */
 public interface ApiRequestLogMapper extends BaseMapper<ApiRequestLog> {
-
+    @Select("select t1.id, t2.name as api_name, t3.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
+            "from api_request_log t1 " +
+            "inner join api_info t2 on t2.id = t1.api_id " +
+            "inner join users t3 on t3.id = t1.user_id " +
+            "${ew.customSqlSegment}")
+    IPage<ApiRequestLogPageVO> selectPageVo(IPage<ApiRequestLogPageVO> page, @Param("ew") LambdaQueryWrapper<ApiRequestLog> queryWrapper);
+    @Select("select t1.id, t2.name as api_name, t3.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
+            "from api_request_log t1 " +
+            "inner join api_info t2 on t2.id = t1.api_id " +
+            "inner join users t3 on t3.id = t1.user_id " +
+            "where t1.id = ${id}")
+    ApiRequestLogVO selectVoById(Long id);
 }
 
 
