@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfleaf.yunapi.mapper.UsersMapper">
 
-    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.entity.Users">
+    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.Users">
             <id property="id" column="id" />
             <result property="username" column="username" />
             <result property="password" column="password" />

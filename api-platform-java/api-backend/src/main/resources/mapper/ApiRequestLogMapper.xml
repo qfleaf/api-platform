@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfleaf.yunapi.mapper.ApiRequestLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.entity.ApiRequestLog">
+    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.ApiRequestLog">
             <id property="id" column="id" />
             <result property="apiId" column="api_id" />
             <result property="userId" column="user_id" />

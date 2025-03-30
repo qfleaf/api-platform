@@ -1,8 +1,8 @@
 package com.qfleaf.yunapi.convert;
 
-import com.qfleaf.yunapi.entity.ApiInfo;
-import com.qfleaf.yunapi.open.model.dto.api.ApiInfoCreateRequest;
-import com.qfleaf.yunapi.open.model.dto.api.ApiInfoUpdateRequest;
+import com.qfleaf.yunapi.model.entity.ApiInfo;
+import com.qfleaf.yunapi.model.dto.api.ApiInfoCreateRequest;
+import com.qfleaf.yunapi.model.dto.api.ApiInfoUpdateRequest;
 import org.springframework.stereotype.Component;
 
 @Component

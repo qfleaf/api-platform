@@ -1,8 +1,8 @@
 package com.qfleaf.yunapi.strategy.login;
 
 
-import com.qfleaf.yunapi.open.model.dto.user.UserLoginRequest;
-import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
+import com.qfleaf.yunapi.model.dto.user.UserLoginRequest;
+import com.qfleaf.yunapi.model.vo.LoginUserVO;
 
 public interface LoginStrategy {
     /**

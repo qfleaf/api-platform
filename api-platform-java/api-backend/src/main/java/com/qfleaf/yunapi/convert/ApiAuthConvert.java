@@ -1,8 +1,8 @@
 package com.qfleaf.yunapi.convert;
 
 import com.qfleaf.web.random.RandomAuthKeyGenerator;
-import com.qfleaf.yunapi.entity.ApiAuth;
-import com.qfleaf.yunapi.open.model.dto.auth.ApiAuthCreateRequest;
+import com.qfleaf.yunapi.model.entity.ApiAuth;
+import com.qfleaf.yunapi.model.dto.auth.ApiAuthCreateRequest;
 import org.springframework.stereotype.Component;
 
 @Component

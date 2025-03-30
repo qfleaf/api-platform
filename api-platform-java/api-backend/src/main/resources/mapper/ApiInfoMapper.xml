@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfleaf.yunapi.mapper.ApiInfoMapper">
 
-    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.entity.ApiInfo">
+    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.ApiInfo">
             <id property="id" column="id" />
             <result property="name" column="name" />
             <result property="description" column="description" />

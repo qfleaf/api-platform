@@ -1,7 +1,7 @@
 package com.qfleaf.yunapi.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qfleaf.yunapi.entity.SdkVersion;
+import com.qfleaf.yunapi.model.entity.SdkVersion;
 import com.qfleaf.yunapi.service.SdkVersionService;
 import com.qfleaf.yunapi.mapper.SdkVersionMapper;
 import org.springframework.stereotype.Service;

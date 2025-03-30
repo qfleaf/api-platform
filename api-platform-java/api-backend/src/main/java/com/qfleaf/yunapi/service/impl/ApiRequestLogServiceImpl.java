@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qfleaf.yunapi.entity.ApiRequestLog;
+import com.qfleaf.yunapi.model.entity.ApiRequestLog;
 import com.qfleaf.yunapi.mapper.ApiRequestLogMapper;
-import com.qfleaf.yunapi.open.model.Pageable;
-import com.qfleaf.yunapi.open.model.vo.ApiRequestLogPageVO;
-import com.qfleaf.yunapi.open.model.vo.ApiRequestLogVO;
+import com.qfleaf.yunapi.model.Pageable;
+import com.qfleaf.yunapi.model.vo.ApiRequestLogPageVO;
+import com.qfleaf.yunapi.model.vo.ApiRequestLogVO;
 import com.qfleaf.yunapi.service.ApiRequestLogService;
 import org.springframework.stereotype.Service;
 

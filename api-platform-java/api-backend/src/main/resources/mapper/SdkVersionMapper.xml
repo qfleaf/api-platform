@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfleaf.yunapi.mapper.SdkVersionMapper">
 
-    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.entity.SdkVersion">
+    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.SdkVersion">
             <id property="id" column="id" />
             <result property="name" column="name" />
             <result property="version" column="version" />

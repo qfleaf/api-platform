@@ -3,7 +3,7 @@ package com.qfleaf.yunapi.annotation.support;
 import com.qfleaf.web.common.ResponseCode;
 import com.qfleaf.web.common.exception.BusinessException;
 import com.qfleaf.yunapi.annotation.Authorized;
-import com.qfleaf.yunapi.open.model.vo.LoginUserVO;
+import com.qfleaf.yunapi.model.vo.LoginUserVO;
 import com.qfleaf.yunapi.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
