@@ -20,6 +20,8 @@ import com.qfleaf.yunapi.strategy.login.LoginStrategyManager;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author qianfang
  * @description 针对表【users(用户表，存储平台用户的基本信息)】的数据库操作Service实现
@@ -64,7 +66,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         LoginUserVO loginUserVO = loginStrategy.doLogin(loginRequest);
         // 封装响应体
         String jwt = jwtService.createJWT(loginUserVO.getUsername());
-        redisUtil.set(RedisConst.LOGIN_USER + jwt, loginUserVO);
+        redisUtil.setWithExpiration(RedisConst.LOGIN_USER + jwt, loginUserVO, 7L, TimeUnit.DAYS);
         UserLoginResponse userLoginResponse = new UserLoginResponse();
         userLoginResponse.setToken(jwt);
         userLoginResponse.setCurrentAuthority(loginUserVO.getRole());
