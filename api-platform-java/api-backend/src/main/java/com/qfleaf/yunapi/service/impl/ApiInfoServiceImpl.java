@@ -21,6 +21,7 @@ import com.qfleaf.yunapi.sdk.ApiClient;
 import com.qfleaf.yunapi.sdk.ApiRequest;
 import com.qfleaf.yunapi.sdk.ApiResponse;
 import com.qfleaf.yunapi.service.ApiInfoService;
+import com.qfleaf.yunapi.service.UsersService;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -37,9 +38,11 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
         implements ApiInfoService {
 
     private final ApiInfoConvert apiInfoConvert;
+    private final UsersService usersService;
 
-    public ApiInfoServiceImpl(ApiInfoConvert apiInfoConvert) {
+    public ApiInfoServiceImpl(ApiInfoConvert apiInfoConvert, UsersService usersService) {
         this.apiInfoConvert = apiInfoConvert;
+        this.usersService = usersService;
     }
 
     @Override
@@ -110,8 +113,13 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
     @Override
     public ApiInfoDebugResponse debug(ApiInfoDebugRequest request) {
         ApiInfo apiInfo = getById(request.getId());
-        ApiClient apiClient = new ApiClient("http://localhost:8080");
-        // todo 封装请求头api授权密钥
+        if (usersService.getCurrentUser() == null) {
+            throw new BusinessException(ResponseCode.BAD_PERMIT, "请登陆后进行调试");
+        }
+        if (apiInfo == null || !apiInfo.getStatus()) {
+            throw new BusinessException(ResponseCode.BAD_REQUEST, "接口已停用");
+        }
+        ApiClient apiClient = new ApiClient("http://localhost:8081");
         ApiRequest apiRequest = new ApiRequest(apiInfo.getEndpoint(), HttpMethod.valueOf(apiInfo.getMethod()), request.getParams());
         ApiResponse call = apiClient.call(apiRequest);
         ApiInfoDebugResponse apiInfoDebugResponse = new ApiInfoDebugResponse();
