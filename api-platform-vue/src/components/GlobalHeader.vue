@@ -13,13 +13,13 @@ const handleSearch = () => {
 </script>
 
 <template>
-  <dev>
+  <div>
     <a-layout-header class="navbar">
       <div class="logo">晓芸API</div>
       <a-input-search v-model:value="searchQuery" placeholder="搜索接口..." class="search-box" @search="handleSearch" />
       <a-button type="primary" class="login-btn" @click="router.push('/login')">登录</a-button>
     </a-layout-header>
-  </dev>
+  </div>
 </template>
 
 <style scoped>
