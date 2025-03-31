@@ -16,16 +16,18 @@ import org.apache.ibatis.annotations.Select;
 * @Entity com.qfleaf.yunapi.entity.ApiRequestLog
 */
 public interface ApiRequestLogMapper extends BaseMapper<ApiRequestLog> {
-    @Select("select t1.id, t2.name as api_name, t3.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
+    @Select("select t1.id, t2.name as api_name, t4.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
             "from api_request_log t1 " +
             "inner join api_info t2 on t2.id = t1.api_id " +
-            "inner join users t3 on t3.id = t1.user_id " +
+            "inner join api_auth t3 on t3.auth_key = t1.auth_key " +
+            "inner join users t4 on t4.id = t3.user_id " +
             "${ew.customSqlSegment}")
     IPage<ApiRequestLogPageVO> selectPageVo(IPage<ApiRequestLogPageVO> page, @Param("ew") LambdaQueryWrapper<ApiRequestLog> queryWrapper);
-    @Select("select t1.id, t2.name as api_name, t3.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
+    @Select("select t1.id, t2.name as api_name, t4.username as request_user, t1.request_time, t1.response_status, t1.response_time " +
             "from api_request_log t1 " +
             "inner join api_info t2 on t2.id = t1.api_id " +
-            "inner join users t3 on t3.id = t1.user_id " +
+            "inner join api_auth t3 on t3.auth_key = t1.auth_key " +
+            "inner join users t4 on t4.id = t3.user_id " +
             "where t1.id = ${id}")
     ApiRequestLogVO selectVoById(Long id);
 }
