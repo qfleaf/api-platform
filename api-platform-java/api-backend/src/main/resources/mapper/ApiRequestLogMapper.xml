@@ -7,9 +7,9 @@
     <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.ApiRequestLog">
             <id property="id" column="id" />
             <result property="apiId" column="api_id" />
-            <result property="userId" column="user_id" />
+            <result property="authKey" column="auth_key" />
             <result property="requestTime" column="request_time" />
-            <result property="requestParams" column="request_params" />
+            <result property="requestParams" column="request_params" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
             <result property="responseStatus" column="response_status" />
             <result property="responseTime" column="response_time" />
             <result property="ipAddress" column="ip_address" />
@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,api_id,user_id,request_time,request_params,response_status,
+        id,api_id,auth_key,request_time,request_params,response_status,
         response_time,ip_address,deleted_at
     </sql>
 </mapper>
