@@ -14,7 +14,7 @@ spring:
 server:
   port: 8081
   servlet:
-    context-path: /openapi
+    context-path: /yunapi
 # 日志配置
 logging:
   level:
