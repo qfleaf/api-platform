@@ -24,6 +24,8 @@ public interface ApiInfoMapper extends BaseMapper<ApiInfo> {
             "from api_info " +
             "where id = ${id}")
     ApiInfoVO selectVoById(Long id);
+    @Select("select id from api_info ${ew.customSqlSegment}")
+    Long selectId(@Param("ew") LambdaQueryWrapper<ApiInfo> queryWrapper);
 }
 
 
