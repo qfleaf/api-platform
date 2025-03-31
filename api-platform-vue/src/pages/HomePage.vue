@@ -42,6 +42,10 @@ const handlePageChange = (page: number, pageSize: number) => {
   fetchApiList();
 };
 
+const handleCheck = (id: number) => {
+  console.log('Check record id:', id);
+};
+
 onMounted(fetchApiList);
 </script>
 
@@ -56,6 +60,11 @@ onMounted(fetchApiList);
         <a-table-column title="状态" key="status">
           <template #default="{ record }">
             <a-badge :status="record.status ? 'success' : 'error'" :text="record.status ? '启用' : '禁用'" />
+          </template>
+        </a-table-column>
+        <a-table-column title="操作" key="action">
+          <template #default="{ record }">
+            <a-button type="link" @click="() => handleCheck(record.id)">查看</a-button>
           </template>
         </a-table-column>
       </a-table>
