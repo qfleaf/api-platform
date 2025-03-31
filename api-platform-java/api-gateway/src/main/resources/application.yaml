@@ -7,13 +7,32 @@ spring:
   cloud:
     gateway:
       routes:
-        # 动态转发至后端服务1
+        # 平台服务转发
+        - id: api-platform
+          uri: http://localhost:8081
+          predicates:
+            - Path=/yunapi/**
+          filters:
+            - StripPrefix=0
+            - name: AuthKey
+              args:
+                enable: false
+            - name: ApiRequestLog
+              args:
+                enable: false
+        # 动态转发至后端服务
         - id: open-service1
-          uri: http://localhost:8081/openapi
+          uri: http://localhost:8081
           predicates:
             - Path=/openapi/**
           filters:
-            - StripPrefix=0
+            - RewritePath=/openapi/(?<segment>.*), /yunapi/openapi/$\{segment}
+            - name: AuthKey
+              args:
+                enable: true
+            - name: ApiRequestLog
+              args:
+                enable: true
         # 动态转发至后端服务2
 #        - id: open-service2
 #          uri: http://localhost:8082
@@ -33,7 +52,7 @@ management:
 
 logging:
   level:
-    org.springframework.cloud.gateway: info
+    org.springframework.cloud.gateway: debug
     reactor.netty: info
 
 dubbo:
