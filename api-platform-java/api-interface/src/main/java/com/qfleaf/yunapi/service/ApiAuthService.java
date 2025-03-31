@@ -17,4 +17,5 @@ public interface ApiAuthService extends IService<ApiAuth> {
     IPage<ApiAuthPageVO> findPageVo(ApiAuthQueryRequest request);
     void generateApiAuth(ApiAuthCreateRequest request);
     ApiAuthVO findById(Long id);
+    boolean existsByAuthKey(String authKey);
 }
