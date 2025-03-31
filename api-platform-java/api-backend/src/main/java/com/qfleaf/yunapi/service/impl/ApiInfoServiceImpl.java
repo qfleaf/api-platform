@@ -8,12 +8,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qfleaf.web.common.ResponseCode;
 import com.qfleaf.web.common.exception.BusinessException;
 import com.qfleaf.yunapi.convert.ApiInfoConvert;
-import com.qfleaf.yunapi.model.entity.ApiInfo;
 import com.qfleaf.yunapi.mapper.ApiInfoMapper;
 import com.qfleaf.yunapi.model.dto.api.ApiInfoCreateRequest;
 import com.qfleaf.yunapi.model.dto.api.ApiInfoDebugRequest;
 import com.qfleaf.yunapi.model.dto.api.ApiInfoQueryRequest;
 import com.qfleaf.yunapi.model.dto.api.ApiInfoUpdateRequest;
+import com.qfleaf.yunapi.model.entity.ApiInfo;
 import com.qfleaf.yunapi.model.vo.ApiInfoDebugResponse;
 import com.qfleaf.yunapi.model.vo.ApiInfoPageVO;
 import com.qfleaf.yunapi.model.vo.ApiInfoVO;
@@ -132,6 +132,9 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
 
     @Override
     public Long findIdByPath(String path) {
+        if (path.startsWith("/yunapi/openapi")) {
+            path = path.substring("/yunapi".length());
+        }
         LambdaQueryWrapper<ApiInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ApiInfo::getEndpoint, path);
         return baseMapper.selectId(queryWrapper);
