@@ -10,6 +10,7 @@ import com.qfleaf.yunapi.model.Pageable;
 import com.qfleaf.yunapi.model.vo.ApiRequestLogPageVO;
 import com.qfleaf.yunapi.model.vo.ApiRequestLogVO;
 import com.qfleaf.yunapi.service.ApiRequestLogService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @description 针对表【api_request_log(API 请求日志表，记录每次 API 调用的信息)】的数据库操作Service实现
  * @createDate 2025-03-29 12:33:27
  */
+@DubboService
 @Service
 public class ApiRequestLogServiceImpl extends ServiceImpl<ApiRequestLogMapper, ApiRequestLog>
         implements ApiRequestLogService {
@@ -34,6 +36,11 @@ public class ApiRequestLogServiceImpl extends ServiceImpl<ApiRequestLogMapper, A
     @Override
     public ApiRequestLogVO findVoById(Long id) {
         return baseMapper.selectVoById(id);
+    }
+
+    @Override
+    public void saveApiRequestLog(ApiRequestLog apiRequestLog) {
+        baseMapper.insert(apiRequestLog);
     }
 }
 

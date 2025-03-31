@@ -15,4 +15,5 @@ import com.qfleaf.yunapi.model.vo.ApiRequestLogVO;
 public interface ApiRequestLogService extends IService<ApiRequestLog> {
     IPage<ApiRequestLogPageVO> findPageVo(Pageable pageable);
     ApiRequestLogVO findVoById(Long id);
+    void saveApiRequestLog(ApiRequestLog apiRequestLog);
 }
