@@ -22,6 +22,7 @@ import com.qfleaf.yunapi.sdk.ApiRequest;
 import com.qfleaf.yunapi.sdk.ApiResponse;
 import com.qfleaf.yunapi.service.ApiInfoService;
 import com.qfleaf.yunapi.service.UsersService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -33,6 +34,7 @@ import java.util.Date;
  * @description 针对表【api_info(API 信息表，存储平台所有对外提供的接口信息)】的数据库操作Service实现
  * @createDate 2025-03-29 12:33:27
  */
+@DubboService
 @Service
 public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
         implements ApiInfoService {
@@ -126,6 +128,13 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
         apiInfoDebugResponse.setStatus(call.getStatus());
         apiInfoDebugResponse.setBody(call.getBody());
         return apiInfoDebugResponse;
+    }
+
+    @Override
+    public Long findIdByPath(String path) {
+        LambdaQueryWrapper<ApiInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ApiInfo::getEndpoint, path);
+        return baseMapper.selectId(queryWrapper);
     }
 }
 

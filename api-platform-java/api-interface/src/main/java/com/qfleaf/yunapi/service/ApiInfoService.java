@@ -24,4 +24,5 @@ public interface ApiInfoService extends IService<ApiInfo> {
     void enable(Long id);
     void disable(Long id);
     ApiInfoDebugResponse debug(ApiInfoDebugRequest request);
+    Long findIdByPath(String path);
 }
