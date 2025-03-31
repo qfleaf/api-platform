@@ -1,12 +1,15 @@
 package com.qfleaf.yunapi.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
+import java.util.Map;
 
 /**
  * @TableName api_request_log
@@ -18,11 +21,12 @@ public class ApiRequestLog implements Serializable {
 
     private Long apiId;
 
-    private Long userId;
+    private String authKey;
 
     private Date requestTime;
 
-    private Object requestParams;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private Map<String, ?> requestParams;
 
     private Integer responseStatus;
 
