@@ -57,17 +57,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>org.apache.dubbo</groupId>-->
-<!--        <artifactId>dubbo-dependencies-zookeeper</artifactId>-->
-<!--        <version>${dubbo-bom.version}</version>-->
-<!--        <type>pom</type>-->
-<!--        <scope>import</scope>-->
-<!--      </dependency>-->
       <!-- MyBatis-Plus -->
       <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+      <!-- 提供分页插件 -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-jsqlparser</artifactId>
         <version>${mybatis-plus.version}</version>
       </dependency>
       <!-- swagger文档 -->
