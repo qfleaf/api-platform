@@ -3,7 +3,9 @@ import { ref, onMounted } from 'vue';
 import { getApiInfoPage } from '../services/apiInfo';
 import type { ApiInfoPageVO } from '../types';
 import GlobalHeader from '../components/GlobalHeader.vue';
+import { useRouter } from 'vue-router';
 
+const route = useRouter();
 const apiList = ref([] as ApiInfoPageVO[]);
 const loading = ref(false);
 const pagination = ref({
@@ -44,6 +46,7 @@ const handlePageChange = (page: number, pageSize: number) => {
 
 const handleCheck = (id: number) => {
   console.log('Check record id:', id);
+  route.push({path: '/api/info', query: { id }});
 };
 
 onMounted(fetchApiList);
