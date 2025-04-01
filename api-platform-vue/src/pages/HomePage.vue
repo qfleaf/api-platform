@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { getApiInfoPage } from '../services/apiInfo';
 import type { ApiInfoPageVO } from '../types';
 import GlobalHeader from '../components/GlobalHeader.vue';
@@ -13,9 +13,9 @@ const router = useRouter();
 const apiList = ref<ApiInfoPageVO[]>([]);
 const loading = ref(false);
 const searchQuery = ref('');
-const pagination = ref({
+const pagination = reactive({
   current: 1,
-  pageSize: 10,
+  size: 10,
   total: 0
 });
 
@@ -24,18 +24,18 @@ const fetchApiList = async () => {
   loading.value = true;
   try {
     const data = await getApiInfoPage({
-      ...pagination.value,
+      ...pagination,
       search: searchQuery.value
     });
     apiList.value = data.records;
-    pagination.value.total = data.total;
-    pagination.value.current = data.current;
-    pagination.value.pageSize = data.size;
+    pagination.total = data.total;
+    pagination.current = data.current;
+    pagination.size = data.size;
   } catch (error) {
     console.error('获取接口列表失败:', error);
     message.error('获取接口列表失败');
     apiList.value = [];
-    pagination.value.total = 0;
+    pagination.total = 0;
   } finally {
     loading.value = false;
   }
@@ -43,8 +43,8 @@ const fetchApiList = async () => {
 
 // 分页变化
 const handlePageChange = (page: number, pageSize: number) => {
-  pagination.value.current = page;
-  pagination.value.pageSize = pageSize;
+  pagination.current = page;
+  pagination.size = pageSize;
   fetchApiList();
 };
 
@@ -106,8 +106,8 @@ onMounted(fetchApiList);
 
         <!-- 分页 -->
         <div class="pagination-container">
-          <a-pagination :current="pagination.current" :total="pagination.total" :pageSize="pagination.pageSize"
-            @change="handlePageChange" showSizeChanger :pageSizeOptions="['10', '20', '50']" />
+          <a-pagination :current="pagination.current" :total="pagination.total" :pageSize="pagination.size"
+            hideOnSinglePage @change="handlePageChange" showSizeChanger :pageSizeOptions="['10', '20', '50']" />
         </div>
       </a-card>
     </a-layout-content>
