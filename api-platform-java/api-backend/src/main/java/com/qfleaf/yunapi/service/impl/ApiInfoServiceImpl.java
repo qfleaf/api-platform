@@ -17,17 +17,20 @@ import com.qfleaf.yunapi.model.entity.ApiInfo;
 import com.qfleaf.yunapi.model.vo.ApiInfoDebugResponse;
 import com.qfleaf.yunapi.model.vo.ApiInfoPageVO;
 import com.qfleaf.yunapi.model.vo.ApiInfoVO;
-import com.qfleaf.yunapi.sdk.ApiClient;
-import com.qfleaf.yunapi.sdk.ApiRequest;
-import com.qfleaf.yunapi.sdk.ApiResponse;
+import com.qfleaf.yunapi.sdk.utils.QueryParamUtil;
+import com.qfleaf.yunapi.sdk.utils.RestUtil;
 import com.qfleaf.yunapi.service.ApiInfoService;
 import com.qfleaf.yunapi.service.UsersService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author qianfang
@@ -41,10 +44,12 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
 
     private final ApiInfoConvert apiInfoConvert;
     private final UsersService usersService;
+    private final HttpServletRequest httpServletRequest;
 
-    public ApiInfoServiceImpl(ApiInfoConvert apiInfoConvert, UsersService usersService) {
+    public ApiInfoServiceImpl(ApiInfoConvert apiInfoConvert, UsersService usersService, HttpServletRequest httpServletRequest) {
         this.apiInfoConvert = apiInfoConvert;
         this.usersService = usersService;
+        this.httpServletRequest = httpServletRequest;
     }
 
     @Override
@@ -121,12 +126,18 @@ public class ApiInfoServiceImpl extends ServiceImpl<ApiInfoMapper, ApiInfo>
         if (apiInfo == null || !apiInfo.getStatus()) {
             throw new BusinessException(ResponseCode.BAD_REQUEST, "接口已停用");
         }
-        ApiClient apiClient = new ApiClient("http://localhost:8081");
-        ApiRequest apiRequest = new ApiRequest(apiInfo.getEndpoint(), HttpMethod.valueOf(apiInfo.getMethod()), request.getParams());
-        ApiResponse call = apiClient.call(apiRequest);
+        Map<String, Object> params = request.getParams();
+        HttpEntity<Map<String, Object>> mapHttpEntity = new HttpEntity<>(params);
+        HttpMethod httpMethod = HttpMethod.valueOf(apiInfo.getMethod());
+        StringBuffer requestURL = httpServletRequest.getRequestURL();
+        String url = requestURL.substring(0, requestURL.indexOf(httpServletRequest.getContextPath())) + "/yunapi" + apiInfo.getEndpoint();
+        if (httpMethod.equals(HttpMethod.GET)) {
+            url = QueryParamUtil.mapToQueryParams(url, params);
+        }
+        ResponseEntity<String> response = RestUtil.call(url, httpMethod, mapHttpEntity, params);
         ApiInfoDebugResponse apiInfoDebugResponse = new ApiInfoDebugResponse();
-        apiInfoDebugResponse.setStatus(call.getStatus());
-        apiInfoDebugResponse.setBody(call.getBody());
+        apiInfoDebugResponse.setStatus(response.getStatusCode().value());
+        apiInfoDebugResponse.setBody(response.getBody());
         return apiInfoDebugResponse;
     }
 
