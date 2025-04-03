@@ -1,25 +1,35 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import type { UserLoginRequest } from '../types';
+import { useUserStore } from '../stores/userStore';
 
 const router = useRouter();
-const username = ref('');
-const password = ref('');
-const errorMessage = ref('');
-const loading = ref(false);
+const userStore = useUserStore();
+// 登录参数
+const loginParams = reactive<UserLoginRequest>({
+  username: '',
+  password: '',
+  loginType: 'account',
+});
+const errorMessage = ref<string>('');
+const loading = ref<boolean>(false);
 
 // 处理登录
-const handleLogin = () => {
-  if (!username.value || !password.value) {
+const handleLogin = async () => {
+  if (!loginParams.username || !loginParams.password) {
     errorMessage.value = '请输入用户名和密码';
     return;
   }
-
   loading.value = true;
-  setTimeout(() => {
-    errorMessage.value = '登录失败，请检查用户名和密码';
-    loading.value = false;
-  }, 1500);
+  userStore.login(loginParams)
+    .then(() => {
+      goBack();
+    }).catch((error: any) => {
+      errorMessage.value = error.message || '登录失败';
+    }).finally(() => {
+      loading.value = false;
+    });
 };
 
 // 返回上一级
@@ -44,8 +54,8 @@ const goBack = () => {
       <p class="subtitle">请使用您的账户登录</p>
 
       <form @submit.prevent="handleLogin" class="login-form">
-        <input v-model="username" type="text" placeholder="用户名" class="input-field" />
-        <input v-model="password" type="password" placeholder="密码" class="input-field" />
+        <input v-model="loginParams.username" type="text" placeholder="用户名" class="input-field" />
+        <input v-model="loginParams.password" type="password" placeholder="密码" class="input-field" />
 
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
