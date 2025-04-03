@@ -12,18 +12,36 @@ export interface Page<T> {
     records: T[]; // 当前页数据
     pages: number; // 总页数
 }
+// =========================接口相关=========================
 // 定义接口分页响应视图
 export type ApiInfoPageVO = {
-    id: number;
+    id: string;
     name: string;
     endpoint: string;
     method: string;
     status: boolean;
 };
+// 定义接口响应视图
+export type ApiInfoVO = {
+    id: string;
+    name: string;
+    description: string;
+    endpoint: string;
+    method: string;
+    version: string;
+    status: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+// 定义接口调试参数结构
+export type ApiDebugRequest = {
+    id: string;
+    params: Record<string, any>; // 请求参数
+}
+// =========================用户相关=========================
 // 定义登录用户的结构
-// 该结构用于存储登录用户的信息
 export type LoginUserVO = {
-    id: number;
+    id: string;
     username: string;
     email: string;
     role: string;
@@ -31,5 +49,13 @@ export type LoginUserVO = {
     createdAt: Date;
     updatedAt: Date;
 }
-
+export type UserLoginRequest = {
+    username: string;
+    password: string;
+    loginType: string;
+}
+export type UserLoginResponse = {
+    token: string;
+    currentAuthority: string;
+}
 // 定义登录请求的参数结构
