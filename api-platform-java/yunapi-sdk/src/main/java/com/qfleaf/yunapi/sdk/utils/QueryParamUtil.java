@@ -1,4 +1,4 @@
-package com.qfleaf.yunapi.sdk;
+package com.qfleaf.yunapi.sdk.utils;
 
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
