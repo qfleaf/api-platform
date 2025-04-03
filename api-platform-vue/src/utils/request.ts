@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
 import type { ApiResponse } from '../types';
+import { useUserStore } from '../stores/userStore';
 
 // 创建 Axios 实例
 const service: AxiosInstance = axios.create({
@@ -13,10 +14,14 @@ const service: AxiosInstance = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
+        const userStore = useUserStore();
+        const token = userStore.getToken;
         if (token) {
             config.headers = config.headers || {};
-            config.headers.Authorization = `Bearer ${token}`;
+            // Bearer Token
+            // config.headers['Authorization'] = `Bearer ${token}`;
+            config.headers.Authorization = `${token}`;
         }
         return config;
     },
@@ -29,7 +34,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     (response: AxiosResponse<ApiResponse>) => {
         const { code, msg, data } = response.data;
-        if (code !== 20000) {
+        if (code / 20000 > 1.5) {
             message.error(msg || '请求失败');
             return Promise.reject(new Error(msg || 'Error'));
         }
