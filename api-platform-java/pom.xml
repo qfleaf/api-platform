@@ -29,6 +29,7 @@
     <httpclient5.version>5.4.3</httpclient5.version>
     <lombok.version>1.18.36</lombok.version>
     <jwt.version>10.0.2</jwt.version>
+    <ip2region.version>2.7.0</ip2region.version>
   </properties>
 
   <dependencyManagement>
@@ -97,6 +98,12 @@
         <groupId>com.nimbusds</groupId>
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>${jwt.version}</version>
+      </dependency>
+      <!-- ip查询服务 -->
+      <dependency>
+        <groupId>org.lionsoul</groupId>
+        <artifactId>ip2region</artifactId>
+        <version>${ip2region.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
