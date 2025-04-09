@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: yun-api-platform
+  datasource:
+    url: jdbc:postgresql://localhost:5432/api-platform-dev
+    driver-class-name: org.postgresql.Driver
+    username: qianfang
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 10000
+server:
+  port: 8081
+  servlet:
+    context-path: /yunapi
+# 日志配置
+logging:
+  level:
+    com.qfleaf: debug
+# mybatis-plus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+      logic-delete-field: deletedAt      # 逻辑删除字段
+      logic-delete-value: now()          # 逻辑删除时的值
+      logic-not-delete-value: 'null'     # 未删除的值
+  type-handlers-package: com.baomidou.mybatisplus.extension.handlers
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+    version: openapi_3_1
+  group-configs:
+    - group: 'a-default'
+      display-name: "默认"
+      paths-to-match: '/**'
+      packages-to-scan: com.qfleaf.yunapi.controller
+  cache:
+    disabled: true
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: false
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体模型
+# dubbo配置
+dubbo:
+  application:
+    name: yun-api-platform
+  registry:
+    address: zookeeper://127.0.0.1:2181  # Zookeeper 作为注册中心
+    subscribe: false
+  protocol:
+    name: dubbo
+    port: 20880
+    serialization: fastjson2

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfleaf.yunapi.mapper.ApiAuthMapper">
+
+    <resultMap id="BaseResultMap" type="com.qfleaf.yunapi.model.entity.ApiAuth">
+            <id property="id" column="id" />
+            <result property="userId" column="user_id" />
+            <result property="appId" column="app_id" />
+            <result property="authKey" column="auth_key" />
+            <result property="expireAt" column="expire_at" />
+            <result property="createdAt" column="created_at" />
+            <result property="deletedAt" column="deleted_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,app_id,auth_key,expire_at,created_at,
+        deleted_at
+    </sql>
+</mapper>
